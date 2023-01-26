@@ -7,9 +7,9 @@ function roll() {
   return rollR;
 }
 //#endregion
-//Game Object constructor
+//Game Object type constructor
 function Game() {
-  this.Player = {}
+  this.players = {}
   this.currentId = 0;
 };
 
@@ -20,19 +20,21 @@ Game.prototype.aId = function() {
 };
 //Player Object constructor
 function Player(pName) {
+  this.id = null;
   this.pName = pName;
   this.pScore = 0;
   this.pTotalScore = 0;
 };
 
 //add player
-Game.prototype.addPlayer = function(name) {
-  this.Player.currentId = this.aId();
-  this.Player.pName = name;
+Game.prototype.addPlayer = function(player) {
+  player.id = this.aId();
+  this.players[player.id] = player;
+  //this.Players[id] = player;
 };
 
 //temp console
-const fGame = new Game("FirstGame");
+const fGame = new Game();
 const player1 = new Player("james");
 const player2 = new Player("Marvin");
 fGame.addPlayer(player1);
