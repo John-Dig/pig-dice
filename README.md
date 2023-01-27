@@ -49,7 +49,14 @@ Code:
 Expected Output: ok
 
 .8 adding UI
+.81 format
+#
+.811 window.onload
 
+.82 add die to playing area
+stay should be sep. function?
+#
+ ## display die roll, player score, total score
 
 
 

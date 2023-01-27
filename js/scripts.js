@@ -1,12 +1,9 @@
-//#region main working
-
 //Die Roll
 Game.prototype.roll =function() {
   let rollR
   rollR = Math.ceil(Math.random() * 6);
   return rollR;
 }
-//#endregion
 //Game Object type: constructor
 function Game() {
   this.players = {}
@@ -26,115 +23,123 @@ Game.prototype.addPlayer = function(player) {
   //this.Players[id] = player;
 };
 
-
-
 //Player Object Type: constructor
 function Player(pName) {
   this.id = null;
   this.pName = pName;
   this.pScore = 0;
-  this.pTotalScore = 90;
+  this.pTotalScore = 0;
   this.turnCounter = 1;
+  this.rolled = 0;
 };
 
-
-//playing game-------------------------------------------------
+//playing game--------------------turn()
 Player.prototype.turn =function() {
   if ((this.pTotalScore + this.pScore) >= 100) {
     console.log("YOU WIN FINALLY!")
     console.log("it only took you " + this.turnCounter + " rounds.")
-    return;
   }
-  let rolled = fGame.roll()
-  console.log("---> " + rolled + " <---")
-  if (rolled === 1) {
+  this.rolled = fGame.roll()
+  console.log(this.rolled)
+  if (this.rolled === 1) {
     this.turnCounter +=1; 
     this.pScore = 0;
-    rolled = null;
     console.log("0! End of turn. Total score is : " + this.pTotalScore + ".");
-    this.turn();
+    console.log("1:" + this.rolled)
+    fGame.updateScore();
   }
-  else if (rolled > 1) {
-    this.pScore += rolled;
+  else if (this.rolled > 1) {
+    this.pScore += this.rolled;
     console.log (this.turnCounter + "| your total for turn is " + this.pScore +".");
     console.log ("Total game score: " + this.pTotalScore);
-    let yn = prompt(rolled + " --roll again?")
-    console.log(yn);
-    if (yn === ""){
-      this.turn();
-    }
-    else if (yn === "n"){
-      
-      this.pTotalScore += this.pScore;
-      this.pScore = 0;
-      this.turnCounter += 1;
-      console.log ("your total score is " + this.pTotalScore + ".");
-      console.log("next turn starting...");
-      yn = null;
-      this.turn();   
-    }
-    else {
-      console.log("else out");
-    }
+    console.log("2:" + this.rolled)
+    fGame.updateScore();
   }
-  else {console.log("error")};
-}
+}  
 
+Player.prototype.stay = function(){
+  this.pTotalScore += this.pScore;
+  this.pScore = 0;
+  this.rolled = 0;
+  this.turnCounter += 1;
+  console.log ("your total score is " + this.pTotalScore + ".");
+  console.log("stayed");
+  fGame.updateScore();
+  if ((this.pTotalScore + this.pScore) >= 100) {
+    console.log("YOU WIN FINALLY!")
+    console.log("it only took you " + this.turnCounter + " rounds.")
+  }
+}
 
 //temp console
 const fGame = new Game();
-const player1 = new Player("james");
+const player1 = new Player("James");
 const player2 = new Player("Marvin");
 fGame.addPlayer(player1);
-// fGame.addPlayer(player2);
+
+//update score
+Game.prototype.updateScore =function(){
+  document.getElementById("total-score").innerText = fGame.players[1].pTotalScore;
+  document.getElementById("round").innerText = fGame.players[1].turnCounter;
+  document.getElementById("round-score").innerText = fGame.players[1].pScore;
+  document.getElementById("die").innerText = fGame.players[1].rolled;
+}
+
+
+//UI
+window.addEventListener("load", function(e){
+  e.preventDefault();
+  let p1Nameplate = document.getElementById("player-name-1");
+  p1Nameplate.append(fGame.players[1].pName);
+  document.getElementById("roll-button").addEventListener("click", function() {
+    fGame.players[1].turn();
+  })  
+  this.document.getElementById("stay-button").addEventListener("click", function() {
+    fGame.players[1].stay();
+  })
+});
 
 
 
 
 
 
+// //#region main // stat tester
 
-//#region main //
-// // not needed ScoreBoard Object constructor
-// function ScoreBoard(player) {
-//   this.player = player
-//   this.score = player.pScore;
-// }
+// rollTest
+// let r1 = 0;
+// let r2 = 0;
+// let r3 = 0;
+// let r4 = 0;
+// let r5 = 0;
+// let r6 = 0;
 
-rollTest
-let r1 = 0;
-let r2 = 0;
-let r3 = 0;
-let r4 = 0;
-let r5 = 0;
-let r6 = 0;
-
-let rollTry = 0;
-function rollTest(){
-  for (i = 0; i <100000000; i ++) {
-          rollTry = roll();
-          if (rollTry === 1) {
-            r1 =r1 +1;
-          }
-          else if (rollTry === 6) {
-            r6 =r6 +1;
-          }
-          else if (rollTry === 2) {
-            r2 =r2 +1;
-          }
-          else if (rollTry === 3) {
-            r3 =r3 +1;
-          }
-          else if (rollTry === 4) {
-            r4 =r4 +1;
-          }
-          else if (rollTry === 5) {
-            r5 =r5 +1;
-          }
-          else {
-            console.log("not")
-          }
-        }
-        return [r1,r2,r3,r4,r5,r6,(r1-r2)];
-      }
-      //#endregion
+// let rollTry = 0;
+// function rollTest(){
+//   for (i = 0; i <100000000; i ++) {
+//           rollTry = roll();
+//           if (rollTry === 1) {
+//             r1 =r1 +1;
+//           }
+//           else if (rollTry === 6) {
+//             r6 =r6 +1;
+//           }
+//           else if (rollTry === 2) {
+//             r2 =r2 +1;
+//           }
+//           else if (rollTry === 3) {
+//             r3 =r3 +1;
+//           }
+//           else if (rollTry === 4) {
+//             r4 =r4 +1;
+//           }
+//           else if (rollTry === 5) {
+//             r5 =r5 +1;
+//           }
+//           else {
+//             console.log("not")
+//           }
+//         }
+//         return [r1,r2,r3,r4,r5,r6,(r1-r2)];
+//       }
+//       //#endregion
