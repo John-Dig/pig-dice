@@ -45,11 +45,22 @@ button {
   border-radius: 5px;
   border-style:double;
   border-color:darkmagenta;
-  padding: 10px;
+  width: 50px;
+  height: 50px;
   background-color: white;
+  text-align: center;
 
 }
 #round-score{
   float:right;
-  margin-right:80px;
+  margin-right:60px;
+  border-style:dashed;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top:18px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  text-align: center;
+
 }

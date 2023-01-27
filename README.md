@@ -54,10 +54,14 @@ Expected Output: ok
 .811 window.onload
 
 .82 add die to playing area
-stay should be sep. function?
-#
- ## display die roll, player score, total score
+stay() should be sep. function?
 
+.9 display die roll, player score, total score
+
+1.0 fully playable 1 player
+1.1 make die square, configure score display
+#
+1.2 add red die for rolling 1
 
 
 
