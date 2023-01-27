@@ -1,13 +1,13 @@
 //#region main working
 
-//Dice Roll
-function roll() {
+//Die Roll
+Game.prototype.roll =function() {
   let rollR
   rollR = Math.ceil(Math.random() * 6);
   return rollR;
 }
 //#endregion
-//Game Object type constructor
+//Game Object type: constructor
 function Game() {
   this.players = {}
   this.currentId = 0;
@@ -18,13 +18,6 @@ Game.prototype.aId = function() {
   this.currentId += 1;
   return this.currentId;
 };
-//Player Object constructor
-function Player(pName) {
-  this.id = null;
-  this.pName = pName;
-  this.pScore = 0;
-  this.pTotalScore = 0;
-};
 
 //add player
 Game.prototype.addPlayer = function(player) {
@@ -33,12 +26,67 @@ Game.prototype.addPlayer = function(player) {
   //this.Players[id] = player;
 };
 
+
+
+//Player Object Type: constructor
+function Player(pName) {
+  this.id = null;
+  this.pName = pName;
+  this.pScore = 0;
+  this.pTotalScore = 90;
+  this.turnCounter = 1;
+};
+
+
+//playing game-------------------------------------------------
+Player.prototype.turn =function() {
+  if ((this.pTotalScore + this.pScore) >= 100) {
+    console.log("YOU WIN FINALLY!")
+    console.log("it only took you " + this.turnCounter + " rounds.")
+    return;
+  }
+  let rolled = fGame.roll()
+  console.log("---> " + rolled + " <---")
+  if (rolled === 1) {
+    this.turnCounter +=1; 
+    this.pScore = 0;
+    rolled = null;
+    console.log("0! End of turn. Total score is : " + this.pTotalScore + ".");
+    this.turn();
+  }
+  else if (rolled > 1) {
+    this.pScore += rolled;
+    console.log (this.turnCounter + "| your total for turn is " + this.pScore +".");
+    console.log ("Total game score: " + this.pTotalScore);
+    let yn = prompt(rolled + " --roll again?")
+    console.log(yn);
+    if (yn === ""){
+      this.turn();
+    }
+    else if (yn === "n"){
+      
+      this.pTotalScore += this.pScore;
+      this.pScore = 0;
+      this.turnCounter += 1;
+      console.log ("your total score is " + this.pTotalScore + ".");
+      console.log("next turn starting...");
+      yn = null;
+      this.turn();   
+    }
+    else {
+      console.log("else out");
+    }
+  }
+  else {console.log("error")};
+}
+
+
 //temp console
 const fGame = new Game();
 const player1 = new Player("james");
 const player2 = new Player("Marvin");
 fGame.addPlayer(player1);
-fGame.addPlayer(player2);
+// fGame.addPlayer(player2);
 
 
 

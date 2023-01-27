@@ -1,8 +1,8 @@
 .1 random number generator 1-6
 .2 create test for evenly distributed output
-.4   create Game object and test
-# .3 create player object and test
-.5 create scoreBoard object and test   
+.3  create Game object and test
+.4 create player object and test
+ 
 .5 logic for adding score up
 .5 logic for loosing turn on 1 roll
 .6 outputting score to scoreboard and roll counter to array or variables 
@@ -36,31 +36,37 @@ Test: "Player object exists"
 Code: Player()
 Expected Output: ƒ Player()){...}
 
-.5 Describe: ScoreBoard()
-Test: "Scoreboard exists"
+.5 
+Test: "players are added to Game correctly"
 Code:
-Expected Output: ƒ ScoreBoard(){...}
+Expected Output: ok
 
 .51 
-Test: can generate player1
+Test: add die roll to Game object
 Code:
-Expected Output:
+Expected Output: ok
 
-Test: can add player1 to game
-Code:
-Expected Output:
+.6 starting turn
+Test: exits turn on rolling 1
+Code: player1.turn()
+Expected Output: 0! End of turn. Total score is : *
 
-Test:
-Code:
-Expected Output:
+.611
+Test: if 2-6, adds roll to player score and prompts player for choice
+Code: player1.turn()
+Expected Output: * -- "roll again?"
 
-Test:
-Code:
-Expected Output:
+.62
+Test: if player choses "stay", outputs score to total and advances turn counter
+Code: player1.turn()
+Expected Output: ok
 
-Test:
+.7
+Test: works fully in console
 Code:
-Expected Output:
+Expected Output: ok
+
+.8 adding UI
 
 
 
