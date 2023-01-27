@@ -1,21 +1,3 @@
-.1 random number generator 1-6
-.2 create test for evenly distributed output
-.3  create Game object and test
-.4 create player object and test
- 
-.5 logic for adding score up
-.5 logic for loosing turn on 1 roll
-.6 outputting score to scoreboard and roll counter to array or variables 
-.7 repeat cycle and have if for reaching 100
-.8 end game with total score output ready
-.9 end game output
-
-
-# Describe: template()
-# Test: ""
-# Code: const text = "hello"; wordCounter(text);
-# Expected Output: 1
-
 .1 Describe: roll()
 Test: "roll outputs number between 1-6"
 Code: roll();
