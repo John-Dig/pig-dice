@@ -1,3 +1,5 @@
+note: main branch is from eggborne, john branch is john-dig's only
+
 .1 get random number generator
   is integer?
   is between 1 and 6?
